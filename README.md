@@ -1,4 +1,3 @@
-# Bino-awarness
 <!DOCTYPE html>
 <html lang="en">
 <head>
