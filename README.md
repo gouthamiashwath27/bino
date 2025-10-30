@@ -1,1 +1,245 @@
 # Bino-awarness
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bino Awareness Campaign</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f4f6ff;
+      color: #222;
+      line-height: 1.6;
+      text-align: center;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: linear-gradient(135deg, #5b6cff, #00c9a7);
+      color: white;
+      padding: 100px 20px;
+      transition: 0.5s;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+      animation: fadeInDown 1s ease-in-out;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .btn {
+      display: inline-block;
+      background: white;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      transition: 0.3s;
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    .btn:hover {
+      background: #222;
+      color: #fff;
+      transform: scale(1.1);
+    }
+
+    #features {
+      padding: 80px 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    #features.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #features h2 {
+      margin-bottom: 30px;
+      font-size: 2em;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotate(-2deg);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    #subscribe {
+      background: #5b6cff;
+      color: white;
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    #subscribe.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #subscribe input {
+      padding: 10px;
+      width: 250px;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    #subscribe button {
+      padding: 10px 20px;
+      border: none;
+      background: #00c9a7;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #subscribe button:hover {
+      background: #00a086;
+    }
+
+    footer {
+      padding: 20px;
+      background: #222;
+      color: #fff;
+      font-size: 0.9em;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Bino</h1>
+    <p>Discover a smarter way to connect, learn, and grow.</p>
+    <a href="#features" class="btn">Explore Features</a>
+  </header>
+
+  <section id="features">
+    <h2>Why Choose Bino?</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>🌟 Smart Experience</h3>
+        <p>Designed to make learning and productivity effortless.</p>
+      </div>
+      <div class="card">
+        <h3>💬 Connect Easily</h3>
+        <p>Join communities, share ideas, and grow together.</p>
+      </div>
+      <div class="card">
+        <h3>⚡ Lightweight</h3>
+        <p>Fast, secure, and accessible on any device.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="subscribe">
+    <h2>Stay Updated!</h2>
+    <p>Enter your email to receive updates about Bino.</p>
+    <form id="emailForm">
+      <input type="email" id="email" placeholder="Your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <p id="msg"></p>
+  </section>
+
+  <footer>
+    <p>Made with ❤️ by Gowthami | #BinoAwareness</p>
+  </footer>
+
+  <script>
+    // Smooth reveal when scrolling
+    function revealOnScroll() {
+      const reveals = document.querySelectorAll("#features, #subscribe");
+      for (let section of reveals) {
+        let windowHeight = window.innerHeight;
+        let elementTop = section.getBoundingClientRect().top;
+        let elementVisible = 100;
+        if (elementTop < windowHeight - elementVisible) {
+          section.classList.add("visible");
+        }
+      }
+    }
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll(); // Run once on load
+
+    // Subscribe form interaction
+    document.getElementById("emailForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      let email = document.getElementById("email").value;
+      let msg = document.getElementById("msg");
+
+      if (email && email.includes("@")) {
+        msg.textContent = "🎉 Thank you for subscribing, " + email + "!";
+        msg.style.color = "lightgreen";
+        document.getElementById("emailForm").reset();
+        alert("Thanks for joining Bino’s awareness campaign! 💌");
+      } else {
+        msg.textContent = "⚠️ Please enter a valid email.";
+        msg.style.color = "yellow";
+      }
+    });
+
+    // Card click animation
+    const cards = document.querySelectorAll(".card");
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        alert("✨ You explored: " + card.querySelector("h3").innerText + "!");
+      });
+    });
+  </script>
+
+</body>
+</html>
